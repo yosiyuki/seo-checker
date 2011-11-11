@@ -14,14 +14,15 @@ ActiveRecord::Schema.define(:version => 20111111015412) do
 
   create_table "site_logs", :force => true do |t|
     t.integer  "site_id",                   :null => false
-    t.datetime "checked_at",                :null => false
+    t.date     "checked_on",                :null => false
+    t.integer  "sites",      :default => 0, :null => false
     t.integer  "links",      :default => 0, :null => false
+    t.integer  "relateds",   :default => 0, :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "site_logs", ["checked_at"], :name => "index_site_logs_on_checked_at"
-  add_index "site_logs", ["links"], :name => "index_site_logs_on_links"
+  add_index "site_logs", ["checked_on"], :name => "index_site_logs_on_checked_on"
   add_index "site_logs", ["site_id"], :name => "index_site_logs_on_site_id"
 
   create_table "sites", :force => true do |t|

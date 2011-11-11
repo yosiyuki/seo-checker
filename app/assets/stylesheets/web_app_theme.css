@@ -11,5 +11,5 @@ td.number {
   text-align: right;
 }
 thead th {
-  text-align: center;
+  text-align: center !important;
 }

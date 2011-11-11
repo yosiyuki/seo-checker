@@ -32,7 +32,7 @@
   <thead>
     <th>Date</th>
     <% @sites.each do |site| %>
-      <th><%= site.name %></th>
+      <th colspan="3"><%= site.name %></th>
     <% end %>
   </thead>
   <% @days.times do |i| %>
@@ -40,9 +40,11 @@
     <tr>
         <td><%=l date %></td>
         <% @sites.each do |site| %>
-          <% idx = @logs.index{ |log| log.checked_at.strftime("%Y-%m-%d") == date.strftime("%Y-%m-%d") and log.site_id == site.id } %>
-          <% links = idx ? @logs[idx].links : 0 %>
-          <td class="number"><%=n links %></td>
+          <% idx = @logs.index{ |log| log.checked_on == date and log.site_id == site.id } %>
+          <% item = idx ? @logs[idx] : nil %>
+          <td class="number"><%=n item ? item.sites : 0 %></td>
+          <td class="number"><%=n item ? item.links : 0 %></td>
+          <td class="number"><%=n item ? item.relateds : 0 %></td>
         <% end %>
     </tr>
   <% end %>

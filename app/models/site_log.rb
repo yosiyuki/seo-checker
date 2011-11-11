@@ -2,14 +2,16 @@ class SiteLog < ActiveRecord::Base
   belongs_to :site
 
   scope :after, lambda { |date|
-      where([ "checked_at > ?", date ])
+      where([ "checked_on > ?", date ])
     }
 
   def self.create_or_update args
     if item = where({
-        :checked_at => args[:checked_at],
+        :checked_on => args[:checked_on],
         :site_id => args[:site_id] }).first
-      item.update_attributes({ :links => args[:links] })
+      args.delete(:site_id)
+      args.delete(:checked_on)
+      item.update_attributes(args)
     else
       create(args)
     end
