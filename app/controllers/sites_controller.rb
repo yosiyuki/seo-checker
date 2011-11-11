@@ -3,7 +3,10 @@ class SitesController < ApplicationController
   # GET /sites.json
   def index
     @sites = Site.all
+    @days = 30
 
+    date = Date.today - @days
+    @logs = SiteLog.after(date).all
     respond_to do |format|
       format.html # index.html.erb
       format.json { render :json => @sites }

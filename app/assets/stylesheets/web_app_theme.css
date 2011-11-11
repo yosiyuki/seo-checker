@@ -7,3 +7,9 @@
  */
 
 /* Write here your css for overriding the theme's rules */
+td.number {
+  text-align: right;
+}
+thead th {
+  text-align: center;
+}

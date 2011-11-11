@@ -26,3 +26,24 @@
 <br />
 
 <%= link_to 'New Site', new_site_path %>
+
+
+<table class="table">
+  <thead>
+    <th>Date</th>
+    <% @sites.each do |site| %>
+      <th><%= site.name %></th>
+    <% end %>
+  </thead>
+  <% @days.times do |i| %>
+    <% date = Date.today - i.days %>
+    <tr>
+        <td><%=l date %></td>
+        <% @sites.each do |site| %>
+          <% idx = @logs.index{ |log| log.checked_at.strftime("%Y-%m-%d") == date.strftime("%Y-%m-%d") and log.site_id == site.id } %>
+          <% links = idx ? @logs[idx].links : 0 %>
+          <td class="number"><%=n links %></td>
+        <% end %>
+    </tr>
+  <% end %>
+</table>
