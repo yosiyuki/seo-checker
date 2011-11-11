@@ -1,0 +1,30 @@
+<%= form_for(@site, :html => { :class => :form }) do |f| %>
+  <% if @site.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@site.errors.count, "error") %> prohibited this site from being saved:</h2>
+
+      <ul>
+      <% @site.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="group">
+    <%= f.label :name, :class => :label %>
+    <%= f.text_field :name %>
+  </div>
+  <div class="group">
+    <%= f.label :domain, :class => :label %>
+    <%= f.text_field :domain %>
+  </div>
+  <div class="group">
+    <%= f.label :note, :class => :label %>
+    <%= f.text_area :note %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
