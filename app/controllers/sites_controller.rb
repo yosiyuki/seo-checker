@@ -42,7 +42,7 @@ class SitesController < ApplicationController
   # POST /sites
   # POST /sites.json
   def create
-    @site = Site.new(params[:site])
+    @site = Site.new(site_params)
 
     respond_to do |format|
       if @site.save
@@ -60,7 +60,7 @@ class SitesController < ApplicationController
   def update
 
     respond_to do |format|
-      if @site.update_attributes(params[:site])
+      if @site.update_attributes(site_params)
         format.html { redirect_to @site, :notice => 'Site was successfully updated.' }
         format.json { head :ok }
       else
