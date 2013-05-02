@@ -6,8 +6,6 @@ class Google
 
   def self.links domain
     count_by linkpath(domain)
-    doc = Nokogiri::HTML(open(linkpath(domain)))
-    doc.xpath("//div[@id='subform_ctrl']/div[2]/b[2]").text.gsub(/,/, "").to_i
   end
 
   def self.sites domain
@@ -20,7 +18,8 @@ class Google
 
   def self.count_by url
     doc = Nokogiri::HTML(open(url))
-    doc.xpath("//div[@id='subform_ctrl']/div[2]/b[2]").text.gsub(/,/, "").to_i
+    match = doc.xpath("//div[@id='resultStats']").text.match(/([\d,]+)/)
+    match[0].gsub(/,/, "")
   end
 
   def self.linkpath domain
