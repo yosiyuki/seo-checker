@@ -1,4 +1,4 @@
 ja:
   date:
     formats:
-      default: %Y-%m-%d
+      default: "%Y-%m-%d"
