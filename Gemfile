@@ -9,11 +9,11 @@ gem 'rails', '4.0.0.beta1'
 gem 'json'
 gem 'jquery-rails'
 gem 'nokogiri'
-gem 'web-app-theme'
 
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
+  gem 'web-app-theme'
   gem 'sass-rails',   '~> 4.0.0.beta1'
   gem 'coffee-rails', '~> 4.0.0.beta1'
   gem 'uglifier'
