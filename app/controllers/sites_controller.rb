@@ -1,4 +1,6 @@
 class SitesController < ApplicationController
+  before_action :set_site, only: [:show, :edit, :update, :destroy]
+
   # GET /sites
   # GET /sites.json
   def index
@@ -16,8 +18,6 @@ class SitesController < ApplicationController
   # GET /sites/1
   # GET /sites/1.json
   def show
-    @site = Site.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.json { render :json => @site }
@@ -37,7 +37,6 @@ class SitesController < ApplicationController
 
   # GET /sites/1/edit
   def edit
-    @site = Site.find(params[:id])
   end
 
   # POST /sites
@@ -59,7 +58,6 @@ class SitesController < ApplicationController
   # PUT /sites/1
   # PUT /sites/1.json
   def update
-    @site = Site.find(params[:id])
 
     respond_to do |format|
       if @site.update_attributes(params[:site])
@@ -75,12 +73,21 @@ class SitesController < ApplicationController
   # DELETE /sites/1
   # DELETE /sites/1.json
   def destroy
-    @site = Site.find(params[:id])
     @site.destroy
 
     respond_to do |format|
       format.html { redirect_to sites_url }
       format.json { head :ok }
     end
+  end
+
+  private
+
+  def set_site
+    @site = Site.find(params[:id])
+  end
+
+  def site_params
+    params.require(:site).permit(:name, :domain, :note)
   end
 end
