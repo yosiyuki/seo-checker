@@ -20,7 +20,7 @@ class Google
     doc = Nokogiri::HTML(open(url))
     match = doc.xpath("//div[@id='resultStats']").text.match(/([\d,]+)/)
     unless match
-      Rails.logger.warn doc.html
+      Rails.logger.warn "#{doc}"
       return false
     end
     match[0].gsub(/,/, "").to_i
