@@ -3,7 +3,6 @@
 <head>
   <title>Web App</title>
   <%= stylesheet_link_tag 'web_app_theme' %>
-  <%= javascript_include_tag :defaults, :cache => true %>
   <%= csrf_meta_tag %>
 </head>
 <body>
@@ -34,13 +33,14 @@
         <div id="footer">
           <div class="block">
             <p>Copyright &copy; <%= Time.now.year %> Web App.</p>
-          </div>      
+          </div>
         </div>
       </div>
       <div id="sidebar">
         <%= yield :sidebar %>
       </div>
-    </div>    
+    </div>
   </div>
+  <%= javascript_include_tag :all %>
 </body>
 </html>
