@@ -19,7 +19,11 @@ class Google
   def self.count_by url
     doc = Nokogiri::HTML(open(url))
     match = doc.xpath("//div[@id='resultStats']").text.match(/([\d,]+)/)
-    match[0].gsub(/,/, "")
+    unless match
+      logger.warn doc.html
+      return false
+    end
+    match[0].gsub(/,/, "").to_i
   end
 
   def self.linkpath domain
