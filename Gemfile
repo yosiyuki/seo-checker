@@ -24,6 +24,7 @@ group :test, :development do
   gem 'rspec-rails'
   gem 'factory_girl'
   gem 'i18n_generators'
+  gem 'thin'
 end
 
 group :production do
