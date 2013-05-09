@@ -5,20 +5,13 @@
     <th>name</th>
     <th>domain</th>
     <th>note</th>
-    <th></th>
-    <th></th>
   </tr>
 
 <% @sites.each do |site| %>
   <tr>
-    <td><%= site.name %></td>
-    <td><%= site.domain %></td>
+    <td><%= link_to site.name, site %></td>
+    <td><%= link_to site.domain, "http://#{site.domain}", target: "_blank" %></td>
     <td><%= truncate(site.note, :length => 30) %></td>
-    <td class="last">
-        <%= link_to 'Show', site %> |
-        <%= link_to 'Edit', edit_site_path(site) %> |
-        <%= link_to 'Destroy', site, :confirm => 'Are you sure?', :method => :delete %>
-    </td>
   </tr>
 <% end %>
 </table>

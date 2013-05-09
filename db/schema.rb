@@ -11,7 +11,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20111111015412) do
+ActiveRecord::Schema.define(version: 20130507163604) do
+
+  create_table "keyword_logs", force: true do |t|
+    t.integer  "keyword_id", null: false
+    t.integer  "rank",       null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "keyword_logs", ["keyword_id"], name: "index_keyword_logs_on_keyword_id"
+
+  create_table "keywords", force: true do |t|
+    t.integer  "site_id",    null: false
+    t.string   "word",       null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "keywords", ["site_id"], name: "index_keywords_on_site_id"
 
   create_table "site_logs", force: true do |t|
     t.integer  "site_id",                null: false

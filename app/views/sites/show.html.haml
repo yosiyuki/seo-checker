@@ -1,0 +1,30 @@
+%p#notice= notice
+
+%h1
+  = link_to @site.domain, "http://#{@site.domain}/", target: "_blank"
+
+%p= @site.name
+%p= @site.note
+
+= link_to 'Top', sites_path
+|
+= link_to 'Edit', edit_site_path(@site)
+|
+= link_to 'Destroy', @site, confirm: 'Are you sure?', method: :delete
+
+%table.table
+  %thead
+    %tr
+      - @site.keywords.each do |word|
+        %th= word.word
+  %tbody
+    - @days.times do |i|
+      %tr
+        - date = Date.today - i.days
+        %td=l date
+        - @site.keywords.each do |word|
+          %td= word.log_at(date) ? word.log_at(date).rank : "-"
+
+
+= render partial: "keywords/form", locals: { keyword: @site.keywords.build }
+

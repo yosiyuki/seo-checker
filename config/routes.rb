@@ -1,5 +1,7 @@
 Seo::Application.routes.draw do
-  resources :sites
+  resources :sites do
+    resources :keywords
+  end
   root :to => "sites#index"
 
   # The priority is based upon order of creation:

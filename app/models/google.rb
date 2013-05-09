@@ -3,6 +3,7 @@ require 'open-uri'
 
 class Google
   SEARCHPATH = "http://www.google.co.jp/search?gcx=w&ie=UTF-8&q="
+  OUTOFSEARCH = 100
 
   def self.links domain
     count_by linkpath(domain)
@@ -26,6 +27,17 @@ class Google
     match[0].gsub(/,/, "").to_i
   end
 
+  def self.rank domain, keyword
+    doc = Nokogiri::HTML(open(rankpath(keyword)))
+    matchdomain = RegExp.new(domain)
+    doc.search(//).each_with_index do |item, index|
+        return index + 1 if item.seach(matchdomain)
+    end
+    return OUTOFSEARCH
+  end
+
+  private
+
   def self.linkpath domain
     self::SEARCHPATH + "link%3A" + domain
   end
@@ -36,5 +48,9 @@ class Google
 
   def self.relatedpath domain
     self::SEARCHPATH + "related%3A" + domain
+  end
+
+  def self.rankpath keyword
+    self::SEARCHPATH + "#{keyword}&n=" . self::OUTOFSEARCH
   end
 end

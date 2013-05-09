@@ -9,6 +9,8 @@ gem 'rails', '4.0.0.beta1'
 gem 'json'
 gem 'jquery-rails'
 gem 'nokogiri'
+gem 'haml'
+gem 'thin'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -24,13 +26,13 @@ group :test, :development do
   gem 'rspec-rails'
   gem 'factory_girl'
   gem 'i18n_generators'
-  gem 'thin'
 end
 
 group :production do
   gem 'rails_log_stdout',           github: 'heroku/rails_log_stdout'
   gem 'rails3_serve_static_assets', github: 'heroku/rails3_serve_static_assets'
   gem 'pg'
+  gem 'dalli'
 end
 
 # Use unicorn as the web server

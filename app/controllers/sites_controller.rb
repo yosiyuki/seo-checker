@@ -18,6 +18,7 @@ class SitesController < ApplicationController
   # GET /sites/1
   # GET /sites/1.json
   def show
+    @days = 30
     respond_to do |format|
       format.html # show.html.erb
       format.json { render :json => @site }

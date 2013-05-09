@@ -1,0 +1,29 @@
+<h1>Listing keywords</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Site</th>
+      <th>Word</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @keywords.each do |keyword| %>
+    <tr>
+      <td><%= keyword.site_id %></td>
+      <td><%= keyword.word %></td>
+      <td><%= link_to 'Show', keyword %></td>
+      <td><%= link_to 'Edit', edit_keyword_path(keyword) %></td>
+      <td><%= link_to 'Destroy', keyword, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br />
+
+<%= link_to 'New Keyword', new_keyword_path %>
