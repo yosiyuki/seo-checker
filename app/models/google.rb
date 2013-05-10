@@ -29,9 +29,9 @@ class Google
 
   def self.rank domain, keyword
     doc = Nokogiri::HTML(open(rankpath(keyword)))
-    matchdomain = RegExp.new(domain)
-    doc.search(//).each_with_index do |item, index|
-        return index + 1 if item.seach(matchdomain)
+    matchdomain = Regexp.new(domain)
+    doc.css("li.g").each_with_index do |item, index|
+        return index + 1 if item.to_s.match(matchdomain)
     end
     return OUTOFSEARCH
   end
@@ -51,6 +51,6 @@ class Google
   end
 
   def self.rankpath keyword
-    self::SEARCHPATH + "#{keyword}&n=" . self::OUTOFSEARCH
+    self::SEARCHPATH + "#{URI.encode(keyword)}&safe=off&num=#{self::OUTOFSEARCH}"
   end
 end
