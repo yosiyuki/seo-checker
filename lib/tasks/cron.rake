@@ -38,7 +38,7 @@ namespace :site do
 end
 
 namespace :keywords do
-  task collect: [ "keywords:rank "]
+  task collect: [ "keywords:rank" ]
 
   task rank: :environment do
     Keyword.all.each do |keyword|
