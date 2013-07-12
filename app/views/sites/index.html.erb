@@ -21,7 +21,7 @@
 <%= link_to 'New Site', new_site_path %>
 
 
-<table class="table">
+<table class="table sites">
   <thead>
     <th>Date</th>
     <% @sites.each do |site| %>
@@ -31,13 +31,12 @@
   <% @days.times do |i| %>
     <% date = Date.today - i.days %>
     <tr>
-        <td><%=l date %></td>
+        <td class="date"><%= date.strftime('%m-%d') %></td>
         <% @sites.each do |site| %>
           <% idx = @logs.index{ |log| log.checked_on == date and log.site_id == site.id } %>
           <% item = idx ? @logs[idx] : nil %>
           <td class="number"><%=n item ? item.sites : 0 %></td>
-          <td class="number"><%=n item ? item.links : 0 %></td>
-          <td class="number"><%=n item ? item.relateds : 0 %></td>
+          <td class="number right"><%=n item ? item.links : 0 %></td>
         <% end %>
     </tr>
   <% end %>

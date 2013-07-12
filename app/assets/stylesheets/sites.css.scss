@@ -1,3 +1,32 @@
 // Place all the styles related to the sites controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+@mixin table-border {
+  border-right: 1px solid #ccc
+}
+table.sites {
+  th {
+    @include table-border;
+  }
+  td {
+    .date {
+      white-space: nowrap
+      @include table-border;
+    }
+    .right {
+      @include table-border;
+    }
+  }
+}
+
+table.keywords {
+  th.word, td.word {
+    width: 5em;
+  }
+  th.word {
+    text-align: center;
+  }
+  td.word {
+    text-align: right;
+  }
+}

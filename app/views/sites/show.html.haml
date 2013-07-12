@@ -12,19 +12,19 @@
 |
 = link_to 'Destroy', @site, confirm: 'Are you sure?', method: :delete
 
-%table.table
+%table.table.keywords
   %thead
     %tr
       %th
       - @site.keywords.each do |word|
-        %th= word.word
+        %th.word= word.word
   %tbody
     - @days.times do |i|
       %tr
         - date = Date.today - i.days
         %td=l date
         - @site.keywords.each do |word|
-          %td= word.log_at(date) ? word.log_at(date).rank : "-"
+          %td.word= word.log_at(date) ? word.log_at(date).rank : "-"
 
 
 = render partial: "keywords/form", locals: { keyword: @site.keywords.build }
