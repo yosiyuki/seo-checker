@@ -10,7 +10,7 @@ table.sites {
   }
   td {
     .date {
-      white-space: nowrap
+      white-space: nowrap;
       @include table-border;
     }
     .right {
