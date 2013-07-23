@@ -1,5 +1,8 @@
 Seo::Application.routes.draw do
   resources :sites do
+    member do
+      get :test
+    end
     resources :keywords
   end
   root :to => "sites#index"
