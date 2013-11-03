@@ -42,10 +42,9 @@ namespace :keywords do
 
   task rank: :environment do
     Keyword.all.each do |keyword|
-      KeywordLog.create(
+      KeywordLog.create_on(DateTime.now, {
         keyword_id: keyword.id,
-        rank: Google.rank(keyword.site.domain, keyword.word),
-      )
+        rank: Google.rank(keyword.site.domain, keyword.word) })
     end
   end
 end
