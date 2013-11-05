@@ -4,7 +4,7 @@ class SitesController < ApplicationController
   # GET /sites
   # GET /sites.json
   def index
-    @sites = Site.all
+    @sites = Site.order(:name).all
     @days = 30
 
     date = Date.today - @days
@@ -74,6 +74,7 @@ class SitesController < ApplicationController
   # DELETE /sites/1
   # DELETE /sites/1.json
   def destroy
+    @site.keywords.each{|word| word.destroy }
     @site.destroy
 
     respond_to do |format|
