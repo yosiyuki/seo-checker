@@ -28,7 +28,7 @@
   %tr
     %th
       - @site.keywords.each do |word|
-        %td= link_to 'Destroy', word, confirm: 'Are you sure?', method: :delete
+        %td= link_to 'Destroy', [@site, word], confirm: 'Are you sure?', method: :delete
 
 
 = render partial: "keywords/form", locals: { keyword: @site.keywords.build }
