@@ -42,7 +42,7 @@ class KeywordsController < ApplicationController
   # DELETE /keywords/1
   def destroy
     @keyword.destroy
-    redirect_to keywords_url, notice: 'Keyword was successfully destroyed.'
+    redirect_to @keyword.site, notice: 'Keyword was successfully destroyed.'
   end
 
   private
