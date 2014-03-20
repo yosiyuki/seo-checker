@@ -48,3 +48,15 @@ namespace :keywords do
     end
   end
 end
+
+namespace :cleanup do
+  task clean: ["cleanup:keyword_log", "cleanup:site_log"]
+
+  task keyword_log: :environment do
+    KeywordLog.where('created_at < ?', 3.month.ago).delete_all
+  end
+
+  task site_log: :environment do
+    SiteLog.where('created_at < ?', 3.month.ago).delete_all
+  end
+end
