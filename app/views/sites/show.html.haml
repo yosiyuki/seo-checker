@@ -2,6 +2,7 @@
 
 %h1
   = link_to @site.domain, "http://#{@site.domain}/", target: "_blank"
+  = "(#{@site.lang})"
 
 %p= @site.name
 %p= @site.note

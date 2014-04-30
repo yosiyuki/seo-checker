@@ -23,6 +23,10 @@
     <%= f.label :note, :class => :label %>
     <%= f.text_area :note %>
   </div>
+  <div class="group">
+    <%= f.label :lang, :class => :label %>
+    <%= f.select :lang, [:jp, :en, :vn] %>
+  </div>
 
   <div class="actions">
     <%= f.submit %>

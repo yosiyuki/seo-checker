@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130507163604) do
+ActiveRecord::Schema.define(version: 20140430063015) do
 
   create_table "keyword_logs", force: true do |t|
     t.integer  "keyword_id", null: false
@@ -45,11 +45,12 @@ ActiveRecord::Schema.define(version: 20130507163604) do
   add_index "site_logs", ["site_id"], name: "index_site_logs_on_site_id"
 
   create_table "sites", force: true do |t|
-    t.string   "name",       null: false
-    t.string   "domain",     null: false
+    t.string   "name",                      null: false
+    t.string   "domain",                    null: false
     t.text     "note"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "lang",       default: "jp", null: false
   end
 
   add_index "sites", ["domain"], name: "index_sites_on_domain"
