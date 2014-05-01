@@ -10,7 +10,7 @@ namespace :site do
     Site.all.each do |site|
       SiteLog.create_or_update({
         site_id: site.id,
-        links: Google.links(site.domain),
+        links: Google.links(site),
         checked_on: Date.today,
       })
     end
@@ -20,7 +20,7 @@ namespace :site do
     Site.all.each do |site|
       SiteLog.create_or_update({
         site_id: site.id,
-        sites: Google.sites(site.domain),
+        sites: Google.sites(site),
         checked_on: Date.today,
       })
     end
@@ -30,7 +30,7 @@ namespace :site do
     Site.all.each do |site|
       SiteLog.create_or_update({
         site_id: site.id,
-        relateds: Google.relateds(site.domain),
+        relateds: Google.relateds(site),
         checked_on: Date.today,
       })
     end
@@ -44,7 +44,7 @@ namespace :keywords do
     Keyword.all.each do |keyword|
       KeywordLog.create_on(DateTime.now, {
         keyword_id: keyword.id,
-        rank: Google.rank(keyword.site.domain, keyword.word) })
+        rank: Google.rank(keyword.site, keyword.word) })
     end
   end
 end
