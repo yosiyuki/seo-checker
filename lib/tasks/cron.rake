@@ -8,6 +8,7 @@ namespace :site do
 
   task links: :environment do
     Site.all.each do |site|
+      puts "== CHECK UP LINKS #{site.domain}"
       SiteLog.create_or_update({
         site_id: site.id,
         links: Google.links(site),
@@ -18,6 +19,7 @@ namespace :site do
 
   task sites: :environment do
     Site.all.each do |site|
+      puts "== CHECK UP SITES #{site.domain}"
       SiteLog.create_or_update({
         site_id: site.id,
         sites: Google.sites(site),
@@ -28,6 +30,7 @@ namespace :site do
 
   task relateds: :environment do
     Site.all.each do |site|
+      puts "== CHECK UP RELATED #{site.domain}"
       SiteLog.create_or_update({
         site_id: site.id,
         relateds: Google.relateds(site),
@@ -42,6 +45,7 @@ namespace :keywords do
 
   task rank: :environment do
     Keyword.all.each do |keyword|
+      puts "== CHECK UP KEYWORD #{keyword.word}"
       KeywordLog.create_on(DateTime.now, {
         keyword_id: keyword.id,
         rank: Google.rank(keyword.site, keyword.word) })
