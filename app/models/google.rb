@@ -34,7 +34,7 @@ class Google
   def self.rank site, keyword
     doc = Nokogiri::HTML(open(rankpath(keyword, site.lang)))
     matchdomain = Regexp.new(site.domain)
-    doc.css("li.g").each_with_index do |item, index|
+    doc.css("div.g h3.r a").each_with_index do |item, index|
         return index + 1 if item.to_s.match(matchdomain)
     end
     return OUTOFSEARCH
