@@ -11,6 +11,7 @@ gem 'jquery-rails'
 gem 'nokogiri'
 gem 'haml'
 gem 'thin'
+gem 'therubyracer'
 gem 'whenever'
 gem 'unicorn'
 
