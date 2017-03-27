@@ -1,0 +1,12 @@
+#!/bin/bash
+
+git checkout db/schema.rb
+git pull origin master
+bundle
+rake assets:precompile RAILS_ENV=production
+rake db:migrate RAILS_ENV=production
+kill -USR2 `cat /var/run/cityguide/cityguide.pid`
+#kill -TERM `cat /var/run/cityguide/cityguide.pid`
+#bundle exec unicorn_rails -c config/unicorn.rb -E production -D
+#RAILS_ENV=production bin/delayed_job restart
+bundle exec whenever --update-crontab
