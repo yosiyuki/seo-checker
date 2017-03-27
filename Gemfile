@@ -11,6 +11,8 @@ gem 'jquery-rails'
 gem 'nokogiri'
 gem 'haml'
 gem 'thin'
+gem 'whenever'
+gem 'unicorn'
 
 # Gems used only for assets and not required
 # in production environments by default.
