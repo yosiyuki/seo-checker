@@ -31,11 +31,38 @@ class Google
     match[0].gsub(/,/, "").to_i
   end
 
+  def initialize site
+    @site = site
+    @docs = {}
+  end
+
+  def rank keyword
+    @docs[keyword] = Nokogiri::HTML(open(rankpath(keyword))) unless @docs.key? keyword
+    matchdomain = Regexp.new(@site.domain)
+    @docs[keyword].css("div.g h3.r a").each_with_index do |item, index|
+      return index + 1 if item.to_s.match(matchdomain)
+    end
+    return Google::OUTOFSEARCH
+  end
+
+  def url keyword
+    @docs[keyword] = Nokogiri::HTML(open(rankpath(keyword))) unless @docs.key? keyword
+    matchdomain = Regexp.new(@site.domain)
+    @docs[keyword].css("div.g h3.r a").each_with_index do |item, index|
+      if item.to_s.match(matchdomain)
+        href = URI.parse(item['href'])
+        query = CGI.parse(href.query)
+        return query['q']
+      end
+    end
+    return nil
+  end
+
   def self.rank site, keyword
     doc = Nokogiri::HTML(open(rankpath(keyword, site.lang)))
     matchdomain = Regexp.new(site.domain)
     doc.css("div.g h3.r a").each_with_index do |item, index|
-        return index + 1 if item.to_s.match(matchdomain)
+      return index + 1 if item.to_s.match(matchdomain)
     end
     return OUTOFSEARCH
   end
@@ -58,7 +85,11 @@ class Google
     self::searchpath(site.lang) + "related%3A" + site.domain
   end
 
-  def self.rankpath keyword, lang
-    self::searchpath(lang) + "#{URI.encode(keyword)}&safe=off&num=#{self::OUTOFSEARCH}"
+  def searchpath
+    Google::SEARCHPATH[@site.lang.to_sym]
+  end
+
+  def rankpath keyword
+    searchpath + "#{URI.encode(keyword)}&safe=off&num=#{Google::OUTOFSEARCH}"
   end
 end

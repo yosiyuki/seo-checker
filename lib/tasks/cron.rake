@@ -46,9 +46,7 @@ namespace :keywords do
   task rank: :environment do
     Keyword.all.each do |keyword|
       puts "== CHECK UP KEYWORD #{keyword.word}"
-      KeywordLog.create_on(DateTime.now, {
-        keyword_id: keyword.id,
-        rank: Google.rank(keyword.site, keyword.word) })
+      KeywordLog.create_for(keyword)
     end
   end
 end

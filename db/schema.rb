@@ -11,27 +11,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140430063015) do
+ActiveRecord::Schema.define(version: 20170408144710) do
 
-  create_table "keyword_logs", force: true do |t|
+  create_table "keyword_logs", force: :cascade do |t|
     t.integer  "keyword_id", null: false
     t.integer  "rank",       null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "url"
   end
 
   add_index "keyword_logs", ["keyword_id"], name: "index_keyword_logs_on_keyword_id"
 
-  create_table "keywords", force: true do |t|
-    t.integer  "site_id",    null: false
-    t.string   "word",       null: false
+  create_table "keywords", force: :cascade do |t|
+    t.integer  "site_id",                null: false
+    t.string   "word",       limit: 255, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "keywords", ["site_id"], name: "index_keywords_on_site_id"
 
-  create_table "site_logs", force: true do |t|
+  create_table "site_logs", force: :cascade do |t|
     t.integer  "site_id",                null: false
     t.date     "checked_on",             null: false
     t.integer  "sites",      default: 0, null: false
@@ -44,13 +45,13 @@ ActiveRecord::Schema.define(version: 20140430063015) do
   add_index "site_logs", ["checked_on"], name: "index_site_logs_on_checked_on"
   add_index "site_logs", ["site_id"], name: "index_site_logs_on_site_id"
 
-  create_table "sites", force: true do |t|
-    t.string   "name",                      null: false
-    t.string   "domain",                    null: false
+  create_table "sites", force: :cascade do |t|
+    t.string   "name",       limit: 255,                null: false
+    t.string   "domain",     limit: 255,                null: false
     t.text     "note"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "lang",       default: "jp", null: false
+    t.string   "lang",       limit: 255, default: "jp", null: false
   end
 
   add_index "sites", ["domain"], name: "index_sites_on_domain"
