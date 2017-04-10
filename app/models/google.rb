@@ -52,7 +52,7 @@ class Google
       if item.to_s.match(matchdomain)
         href = URI.parse(item['href'])
         query = CGI.parse(href.query)
-        return query['q']
+        return query.key?('q') ? query['q'][0] : nil
       end
     end
     return nil
