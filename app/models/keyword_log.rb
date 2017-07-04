@@ -8,7 +8,7 @@ class KeywordLog < ActiveRecord::Base
   end
 
   def self.create_for keyword
-    record = keyword.log_at(Time.zone.now) || new (keyword_id: keyword.id)
+    record = keyword.log_at(Time.zone.now) || new(keyword_id: keyword.id)
     g = Google.new keyword.site
     record.attributes = { rank: g.rank(keyword.word), url: g.url(keyword.word) }
     record.save
