@@ -45,8 +45,9 @@ namespace :keywords do
 
   task rank: :environment do
     Keyword.all.each do |keyword|
+      next if keyword.log_at Tine.zone.now
       puts "== CHECK UP KEYWORD #{keyword.word}"
-      KeywordLog.create_for(keyword)
+      KeywordLog.create_for keyword
     end
   end
 end

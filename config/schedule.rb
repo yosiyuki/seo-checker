@@ -19,6 +19,10 @@
 
 # Learn more: http://github.com/javan/whenever
 
+every 1.hour do
+  rake "keywords:collect"
+end
+
 every :day, :at => '2:20am' do
-  rake "cron"
+  rake "site:collect"
 end
