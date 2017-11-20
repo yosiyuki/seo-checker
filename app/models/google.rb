@@ -40,7 +40,10 @@ class Google
     @docs[keyword] = Nokogiri::HTML(open(rankpath(keyword))) unless @docs.key? keyword
     matchdomain = Regexp.new(@site.domain)
     @docs[keyword].css("div.g h3.r a").each_with_index do |item, index|
-      return index + 1 if item.to_s.match(matchdomain)
+      begin
+        return index + 1 if item.to_s.match(matchdomain)
+      rescue ArgumentError => e
+      end
     end
     return Google::OUTOFSEARCH
   end
