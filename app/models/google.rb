@@ -52,10 +52,13 @@ class Google
     @docs[keyword] = Nokogiri::HTML(open(rankpath(keyword))) unless @docs.key? keyword
     matchdomain = Regexp.new(@site.domain)
     @docs[keyword].css("div.g h3.r a").each_with_index do |item, index|
-      if item.to_s.match(matchdomain)
-        href = URI.parse(item['href'])
-        query = CGI.parse(href.query)
-        return query.key?('q') ? query['q'][0] : nil
+      begin
+        if item.to_s.match(matchdomain)
+          href = URI.parse(item['href'])
+          query = CGI.parse(href.query)
+          return query.key?('q') ? query['q'][0] : nil
+        end
+      rescue ArgumentError => e
       end
     end
     return nil
